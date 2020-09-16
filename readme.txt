@@ -8,3 +8,14 @@ Plan:
 	real time notification system when shared - using channel and jobs
 
 	Parallely create and add up migrations
+
+
+
+Done:
+
+	installed devise
+	seed created for user
+
+	installed jquery, bs, popper
+	generated & modified devise views
+

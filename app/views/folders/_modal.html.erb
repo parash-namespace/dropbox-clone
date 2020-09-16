@@ -1,0 +1,29 @@
+<div class="modal fade" id="add_folder_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<%= simple_form_for @folder do |f| %>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">
+					Create Folder
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<%= f.input :name, placeholder: "Enter Folder Name.", class: "form-control", required: "required" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :folder_description %>
+					<%= f.text_area :folder_description, placeholder: "Enter Folder Description.", class: "form-control" %>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>

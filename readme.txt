@@ -11,11 +11,8 @@ Plan:
 
 
 
-Done:
+To do:
 
-	installed devise
-	seed created for user
+	https://www.benkirane.ch/ajax-bootstrap-modals-rails/
 
-	installed jquery, bs, popper
-	generated & modified devise views
-
+	get ajax and show in modal

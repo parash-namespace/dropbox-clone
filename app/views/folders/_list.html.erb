@@ -1,3 +1,5 @@
 <% @folders.each do |folder| %>
+<div class="text-center pl-5 folder row mb-4" id="folder_<%= folder.id %>">
 	<%= render 'folders/each', {folder: folder} %>
+</div>
 <% end %>

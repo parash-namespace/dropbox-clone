@@ -1,5 +1,7 @@
 <span>
-	<i class="fas fa-plus-square mid-icon float-right" data-toggle="modal" data-target="#add_folder_modal"></i>
+	<%= link_to new_folder_path, remote: true do %>
+		<i class="fas fa-plus-square mid-icon float-right" data-toggle="modal" data-target="#add_folder_modal"></i>
+	<% end %>
 </span>
 
 <%= render 'folders/modal' %>
@@ -7,6 +9,6 @@
 <div class="clearfix mt-2">
 </div>
 
-<div class="row">
+<div class="row" id="folder_list">
 	<%= render 'folders/list' %>
 </div>

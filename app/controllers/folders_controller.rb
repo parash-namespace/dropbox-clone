@@ -6,7 +6,7 @@ class FoldersController < ApplicationController
 
 	def index
 		@folder = Folder.new
-		@folders = Folder.all
+		@folders = Folder.where.not('name': 'root')
 	end
 
 	def new

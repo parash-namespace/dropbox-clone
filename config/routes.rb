@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'folders#index'
 
   resources 'folders' do
-  	resources 'uploads'
+  	resources 'uploads', only: [:index, :new, :create, :destroy]
+  	resources 'subfolders'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

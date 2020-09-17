@@ -17,6 +17,10 @@ class UploadsController < ApplicationController
 		@folder.update(uploads_params)
 	end
 
+	def destroy
+		@folder.uploads.delete(params[:id])
+	end
+
 
 	private
 	

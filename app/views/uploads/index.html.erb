@@ -1,7 +1,13 @@
 <span>
 	<%= link_to new_folder_upload_path, remote: true do %>
-		<i class="fas fa-plus-square mid-icon float-right" data-toggle="modal" data-target="#uploads_modal"></i>
+		<i class="fas fa-plus-square mid-icon float-right magenta" data-toggle="modal" data-target="#uploads_modal"></i>
 	<% end %>
+
+	<%= link_to new_folder_upload_path, remote: true do %>
+		<i class="fas fa-folder-plus mid-icon float-right mr-2 add" data-toggle="modal" data-target="#uploads_modal"></i>
+	<% end %>
+
+
 </span>
 
 <%= render 'uploads/modal' %>

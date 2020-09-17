@@ -1,8 +1,13 @@
 <div>
 	<div>
 		<%= link_to rails_blob_path(upload, disposition: 'preview'), target: 'blank' do %>
-		<i class="fas fa-folder xl-icon" title="<%= upload.filename %>"></i>
-		upload.filename
+		<i class="fas fa-file-alt xl-icon file mb-2" title="<%= upload.filename %>"></i>
+		<span><%= upload.filename %></span>
 		<% end %>
 	</div>
+</div>
+<div class="col-md-2">
+	<%= link_to folder_upload_path(@folder, upload.id), remote: true, data: {confirm: 'Do you want to remove the file?'}, method: :delete do %>
+	<i class="fas fa-trash-alt xs-icon  float-left delete" title="<%= upload.filename %>"></i>
+	<% end %>
 </div>

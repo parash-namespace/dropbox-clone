@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'font-awesome-sass'
 gem 'simple_form'
+gem 'cloudinary'
+gem 'acts_as_tree'
 
 
 # Reduces boot times through caching; required in config/boot.rb

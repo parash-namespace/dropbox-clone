@@ -13,6 +13,7 @@ Plan:
 
 To do:
 
-	https://www.benkirane.ch/ajax-bootstrap-modals-rails/
-
-	get ajax and show in modal
+	active storage
+	cloudinary setup
+	acts_as_tree
+	db:migrate

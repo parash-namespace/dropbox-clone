@@ -1,5 +1,7 @@
 <div>
+	<%= link_to folder_uploads_path(folder) do %>
 	<i class="fas fa-folder xl-icon" title="<%= folder.name %>"></i>
+	<% end %>
 	<br>
 	<div>
 		<%= folder.name %>

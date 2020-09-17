@@ -1,0 +1,10 @@
+<% if @folder.uploads.present? %>
+
+<% @folder.uploads.each do |upload| %>
+<div class="text-center pl-5 folder row mb-4" id="upload_<%= upload.id %>">
+	<%= render 'uploads/each', {upload: upload} %>
+</div>
+<% end %>
+
+
+<% end %>

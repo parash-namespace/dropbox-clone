@@ -2,7 +2,7 @@ class FoldersController < ApplicationController
 
 	layout 'dropbox'
 
-	before_action :get_folder, only: [:show, :update]
+	before_action :get_folder, only: [:show, :update, :destroy]
 
 	def index
 		@folder = Folder.new
@@ -33,6 +33,12 @@ class FoldersController < ApplicationController
 		@folder.update(folder_params)
 	end
 
+	def destroy
+		if @folder.present?
+			@folder.destroy
+		end
+		@folders = Folder.where.not('name': 'root')
+	end
 
 	private
 	def folder_params

@@ -7,8 +7,12 @@
 		<%= folder.name %>
 	</div>
 </div>
-<div class="col-md-4">
+<div class="col-md-6">
 	<%= link_to folder_path(folder), remote: true do %>
-	<i class="fas fa-pencil-alt xs-icon ml-2 float-left edit" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
+	<i class="fas fa-pencil-alt xs-icon float-left edit pr-2" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
+	<% end %>
+
+	<%= link_to folder_path(folder), remote: true, data: {confirm: 'Do you want to remove the folder?'}, method: :delete do %>
+	<i class="fas fa-trash-alt xs-icon  float-left delete" title="<%= folder.name %>"></i>
 	<% end %>
 </div>

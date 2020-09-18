@@ -1,10 +1,14 @@
-<% if @folder.uploads.present? %>
 
-<% @folder.uploads.each do |upload| %>
+<% if @root_folder.uploads.present? %>
+
+<div class="text-info col-md-12 m-2">
+	<h5>Uploads</h5>
+</div>
+
+<% @root_folder.uploads.each do |upload| %>
 <div class="text-center pl-5 folder row mb-4" id="upload_<%= upload.id %>">
 	<%= render 'uploads/each', {upload: upload} %>
 </div>
 <% end %>
-
 
 <% end %>

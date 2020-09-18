@@ -1,16 +1,22 @@
-<span>
-	<%= link_to new_folder_path, remote: true do %>
-		<i class="fas fa-plus-square mid-icon float-right" data-toggle="modal" data-target="#add_folder_modal"></i>
-	<% end %>
+<!-- links for new -->
+	<%= render "shared/create_buttons" %>
+<!-- links for new -->
 
-	
-</span>
 
-<%= render 'folders/modal' %>
+
+<%= render "shared/modals" %>
+
 
 <div class="clearfix mt-2">
 </div>
 
+<!-- list begins -->
 <div class="row" id="folder_list">
 	<%= render 'folders/list' %>
+</div>
+<!-- list end -->
+
+
+<div class="row" id="upload_list">
+	<%= render 'uploads/list' %>
 </div>

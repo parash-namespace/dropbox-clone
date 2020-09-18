@@ -3,7 +3,7 @@ class FoldersController < ApplicationController
 	layout 'dropbox'
 
 	before_action :get_folder, only: [:show, :update, :destroy]
-	before_action :get_root_folder, only: [:index, :create, :destroy]
+	before_action :get_root_folder, only: [:index, :create, :destroy, :update]
 	before_action :get_folders, only: [:index]
 
 	def index
@@ -30,6 +30,7 @@ class FoldersController < ApplicationController
 	def update
 		@folder.update(folder_params)
 		get_folder
+		# redirect_to root_path
 	end
 
 	def destroy

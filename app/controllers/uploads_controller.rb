@@ -5,6 +5,7 @@ class UploadsController < ApplicationController
 
 	
 	before_action :get_folder, :get_root_folder, :get_folders, :has_permission?
+	before_action :is_owner?, except: [:index]
 
 	def index
 		render file: 'folders/index'
@@ -24,13 +25,13 @@ class UploadsController < ApplicationController
 
 
 	private
-	
-	def get_folder
-		@folder = Folder.find(params[:folder_id])
-	end
 
 	def uploads_params
 		params.require(:upload).permit(uploads: [])
+	end
+	
+	def get_folder
+		@folder = Folder.find(params[:folder_id])
 	end
 
 	def get_root_folder
@@ -42,11 +43,11 @@ class UploadsController < ApplicationController
 	end
 
 	def has_permission?
-		redirect_to root_path if (!is_shared? && !is_owner?)
+		redirect_to root_path if (!is_shared? && (@root_folder.owner_id != current_user.id))
 	end
 
 	def is_owner?
-		@root_folder.owner_id == current_user.id
+		redirect_to root_path if @folder.owner_id != current_user.id
 	end
 
 	def is_shared?

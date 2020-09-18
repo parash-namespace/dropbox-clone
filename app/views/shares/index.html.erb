@@ -1,0 +1,21 @@
+<div class="text-info col-md-12 m-2">
+	<h5>Shared With me</h5>
+</div>
+
+<div class="col-md-12 row">
+	<% @folders.each do |folder| %>
+
+	<div class="text-center pl-5 folder row mb-4" >
+		<div>
+			<%= link_to folder_uploads_path(folder) do %>
+			<i class="fas fa-folder xl-icon" title="<%= folder.name %>"></i>
+			<% end %>
+			<br>
+			<div>
+				<%= folder.name %>
+			</div>
+		</div>
+	</div>
+
+	<% end %>
+</div>

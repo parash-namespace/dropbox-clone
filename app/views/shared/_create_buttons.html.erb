@@ -1,34 +1,60 @@
-<div class="float-left">
-	
-	<% nav_list = [] %>
-	<% nav = @root_folder %>
-	<% nav_list << nav %>
 
-	<% while nav.parent.present? do %>
+<% if @root_folder.owner_id != current_user.id %>
+<div>
+	<span class="text-info"><strong>Shared by: </strong><%= @root_folder.user.name %></span>
+</div>
+<% end %>
+
+<div>
+	<div class="float-left">
+
+		<% nav_list = [] %>
+		<% nav = @root_folder %>
+		<% nav_list << nav %>
+
+		<!-- collect all the nav list -->
+		<% while nav.parent.present? do %>
 		<% nav = nav.parent %>
 		<% nav_list << nav %>
+		<% end %>
+
+		<!-- so that user wont know root id -->
+		<% if @root_folder.owner_id == current_user.id %>
+		<%= link_to "Home", root_path %>
+		<% else %>
+		<%= link_to "Shared with me", shared_path %>
+		<% end %>
+
+		<!-- reverse print  -->
+		<% nav_list.reverse.each do |nav| %>
+		<!-- never print root  -->
+		<% if nav.name != 'root'  %>
+		<!-- unclickable -->
+		<% if nav_list.first == nav %>
+		/ <%= nav.name %>
+		<!-- clickable -->
+		<% else %>
+		/ <%= link_to nav.name, folder_uploads_path(nav) %> 
+		<% end %>
+		<% end %>
+		<% end %>
+
+
+	</div>
+
+	<% if @root_folder.owner_id == current_user.id %>
+	<span>
+		<%= link_to new_folder_upload_path(folder_id: @root_folder.id), remote: true do %>
+		<i class="fas fa-plus-square mid-icon float-right add file" data-toggle="modal" data-target="#uploads_modal"></i>
+		<% end %>
+	</span>
+
+	<span>
+		<%= link_to new_folder_path(parent_id: @root_folder.id), remote: true do %>
+		<i class="fas fa-folder-plus mid-icon float-right mr-2 orange" data-toggle="modal" data-target="#add_folder_modal"></i>
+		<% end %>
+	</span>
 	<% end %>
-
-
-	<% nav_list.reverse.each do |nav| %>
-	<% if nav_list.first == nav %>
-	<%= nav.name %>
-	<% else %>
-	<%= link_to nav.name, folder_uploads_path(nav) %> /
-	<% end %>
-	<% end %>
-
-
 </div>
 
-<span>
-	<%= link_to new_folder_upload_path(folder_id: @root_folder.id), remote: true do %>
-		<i class="fas fa-plus-square mid-icon float-right add file" data-toggle="modal" data-target="#uploads_modal"></i>
-	<% end %>
-</span>
-
-<span>
-	<%= link_to new_folder_path(parent_id: @root_folder.id), remote: true do %>
-	<i class="fas fa-folder-plus mid-icon float-right mr-2 orange" data-toggle="modal" data-target="#add_folder_modal"></i>
-	<% end %>
-</span>
+<div class="clearfix"></div>

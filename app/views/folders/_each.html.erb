@@ -1,7 +1,7 @@
 <div class="text-center pl-5 folder row mb-4" >
-	<div>
+	<div class="zoom">
 		<%= link_to folder_uploads_path(folder) do %>
-		<i class="fas fa-folder xl-icon" title="<%= folder.name %>"></i>
+		<i class="fas fa-folder xl-icon mb-2" title="<%= folder.name %>"></i>
 		<% end %>
 		<br>
 		<div>
@@ -9,12 +9,21 @@
 		</div>
 	</div>
 	<div class="col-md-6">
+		<% if @root_folder.owner_id == current_user.id %>
+		
+		<%= link_to folder_path(folder), remote: true, data: {confirm: 'Do you want to remove the folder?'} do %>
+		<i class="zoom fas fa-share-alt xs-icon pr-2 float-left share" title="<%= folder.name %>" data-toggle="modal" data-target="#share_modal"></i>
+		<% end %>
+
 		<%= link_to folder_path(folder), remote: true do %>
-		<i class="fas fa-pencil-alt xs-icon float-left edit pr-2" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
+		<i class="zoom fas fa-pencil-alt xs-icon float-left edit pr-2" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
 		<% end %>
 
 		<%= link_to folder_path(folder), remote: true, data: {confirm: 'Do you want to remove the folder?'}, method: :delete do %>
-		<i class="fas fa-trash-alt xs-icon  float-left delete" title="<%= folder.name %>"></i>
+		<i class="zoom fas fa-trash-alt xs-icon pr-2 float-left delete" title="<%= folder.name %>"></i>
+		<% end %>
+
+
 		<% end %>
 	</div>
 </div>

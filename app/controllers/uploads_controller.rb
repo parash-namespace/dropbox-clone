@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
 	layout 'dropbox'
 
 	
-	before_action :get_folder, :get_root_folder, :get_folders, :is_owner?
+	before_action :get_folder, :get_root_folder, :get_folders, :has_permission?
 
 	def index
 		render file: 'folders/index'
@@ -41,8 +41,30 @@ class UploadsController < ApplicationController
 		@folders = @root_folder.children
 	end
 
+	def has_permission?
+		redirect_to root_path if (!is_shared? && !is_owner?)
+	end
+
 	def is_owner?
-		redirect_to root_path if @root_folder.owner_id != current_user.id
+		@root_folder.owner_id == current_user.id
+	end
+
+	def is_shared?
+
+		flag = false
+		folder = @root_folder
+		
+		while folder.parent.present?
+			result = current_user.shares.find_by('folder_id': folder.id)
+
+			if result
+				flag = true
+				break
+			end
+			folder = folder.parent
+		end
+
+		flag
 	end
 
 end

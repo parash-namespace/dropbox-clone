@@ -3,6 +3,7 @@ class FoldersController < ApplicationController
 	layout 'dropbox'
 
 	before_action :get_folder, only: [:show, :update, :destroy]
+	before_action :get_root_folder, only: [:index, :create]
 
 	def index
 		@folder = Folder.new
@@ -47,5 +48,13 @@ class FoldersController < ApplicationController
 
 	def get_folder
 		@folder = Folder.find(params[:id])
+	end
+
+	def get_root_folder
+		@root_folder = current_user.folders.find_by("name": "root")
+		if !@root_folder
+			@root_folder = Folder.new('name': 'root', 'owner_id': current_user.id,)
+			@root_folder.save
+		end
 	end
 end

@@ -4,9 +4,9 @@ class FoldersController < ApplicationController
 
 	before_action :get_folder, only: [:show, :update, :destroy]
 	before_action :get_root_folder, only: [:index, :create]
+	before_action :get_folders, only: [:index, :create, :destroy]
 
 	def index
-		@folders = @root_folder.children
 	end
 
 	def new
@@ -14,11 +14,13 @@ class FoldersController < ApplicationController
 	end
 
 	def create
+
 		@folder = Folder.new(folder_params)
 		@folder.owner_id = current_user.id
 
 		@folder.parent_id = get_parent_param
 		@folder.parent_id = @root_folder.id if @folder.parent_id.nil?
+		
 		@folder.save
 	end
 
@@ -33,9 +35,9 @@ class FoldersController < ApplicationController
 		if @folder.present?
 			@folder.destroy
 		end
-		@folders = Folder.where.not('name': 'root')
 	end
 
+	# might be used in other classes as well
 	private
 	def get_root_folder
 		@root_folder = current_user.folders.first_or_create("name": "root")
@@ -51,6 +53,10 @@ class FoldersController < ApplicationController
 
 	def get_folder
 		@folder = Folder.find(params[:id])
+	end
+
+	def get_folders
+		@folders = @root_folder.children
 	end
 
 end

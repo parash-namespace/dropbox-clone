@@ -6,8 +6,7 @@ class FoldersController < ApplicationController
 	before_action :get_root_folder, only: [:index, :create]
 
 	def index
-		@folder = Folder.new
-		@folders = Folder.where.not('name': 'root')
+		@folders = @root_folder.children
 	end
 
 	def new
@@ -18,13 +17,9 @@ class FoldersController < ApplicationController
 		@folder = Folder.new(folder_params)
 		@folder.owner_id = current_user.id
 
-		if @folder.save
-			flash[:notice] = "Successfully created new folder."
-		else
-			flash[:alert] = "Failed to create new folder."
-		end
-		
-		redirect_to root_path
+		@folder.parent_id = get_parent_param
+		@folder.parent_id = @root_folder.id if @folder.parent_id.nil?
+		@folder.save
 	end
 
 	def show
@@ -42,19 +37,20 @@ class FoldersController < ApplicationController
 	end
 
 	private
+	def get_root_folder
+		@root_folder = current_user.folders.first_or_create("name": "root")
+	end
+
 	def folder_params
 		params.require(:folder).permit(:name, :folder_description)
+	end
+
+	def get_parent_param
+		params.require(:folder).permit(:parent_id)
 	end
 
 	def get_folder
 		@folder = Folder.find(params[:id])
 	end
 
-	def get_root_folder
-		@root_folder = current_user.folders.find_by("name": "root")
-		if !@root_folder
-			@root_folder = Folder.new('name': 'root', 'owner_id': current_user.id,)
-			@root_folder.save
-		end
-	end
 end

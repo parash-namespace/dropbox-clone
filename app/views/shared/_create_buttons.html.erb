@@ -1,0 +1,15 @@
+<div class="float-left">
+	Root / assa / 
+</div>
+
+<span>
+	<%= link_to new_folder_upload_path(folder_id: @root_folder.id), remote: true do %>
+		<i class="fas fa-plus-square mid-icon float-right add file" data-toggle="modal" data-target="#uploads_modal"></i>
+	<% end %>
+</span>
+
+<span>
+	<%= link_to new_folder_path(parent_id: @root_folder.id), remote: true do %>
+	<i class="fas fa-folder-plus mid-icon float-right mr-2 orange" data-toggle="modal" data-target="#add_folder_modal"></i>
+	<% end %>
+</span>

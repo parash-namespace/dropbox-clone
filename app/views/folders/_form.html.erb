@@ -4,7 +4,7 @@
 		<h5 class="modal-title" id="exampleModalLabel">
 			<%= @folder.new_record? ? "Create " : "Edit " %>Folder
 		</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modal_close">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close_form_modal">
 			<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
@@ -12,7 +12,7 @@
 		<div class="form-group">
 			<%= f.input :name, placeholder: "Enter Folder Name.", class: "form-control", required: "required" %>
 		</div>
-		<%= f.input :parent_id, as: 'hidden'  %>
+		<%= f.input :parent_id, as: 'hidden', input_html: { value: @parent_id} %>
 		<div class="form-group">
 			<%= f.label :folder_description %>
 			<%= f.text_area :folder_description, placeholder: "Enter Folder Description.", class: "form-control" %>

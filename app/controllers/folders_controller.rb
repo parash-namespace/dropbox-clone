@@ -3,22 +3,22 @@ class FoldersController < ApplicationController
 	layout 'dropbox'
 
 	before_action :get_folder, only: [:show, :update, :destroy]
-	before_action :get_root_folder, only: [:index, :create]
-	before_action :get_folders, only: [:index, :create, :destroy]
+	before_action :get_root_folder, only: [:index, :create, :destroy]
+	before_action :get_folders, only: [:index]
 
 	def index
 	end
 
 	def new
 		@folder = Folder.new
+		@parent_id = params[:parent_id] if params[:parent_id]
 	end
 
 	def create
-
 		@folder = Folder.new(folder_params)
 		@folder.owner_id = current_user.id
 
-		@folder.parent_id = get_parent_param
+		@folder.parent_id = get_parent_param['parent_id']
 		@folder.parent_id = @root_folder.id if @folder.parent_id.nil?
 		
 		@folder.save
@@ -29,6 +29,7 @@ class FoldersController < ApplicationController
 
 	def update
 		@folder.update(folder_params)
+		get_folder
 	end
 
 	def destroy

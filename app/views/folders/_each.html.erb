@@ -1,18 +1,20 @@
-<div>
-	<%= link_to folder_uploads_path(folder) do %>
-	<i class="fas fa-folder xl-icon" title="<%= folder.name %>"></i>
-	<% end %>
-	<br>
+<div class="text-center pl-5 folder row mb-4" >
 	<div>
-		<%= folder.name %>
+		<%= link_to folder_uploads_path(folder) do %>
+		<i class="fas fa-folder xl-icon" title="<%= folder.name %>"></i>
+		<% end %>
+		<br>
+		<div>
+			<%= folder.name %>
+		</div>
 	</div>
-</div>
-<div class="col-md-6">
-	<%= link_to folder_path(folder), remote: true do %>
-	<i class="fas fa-pencil-alt xs-icon float-left edit pr-2" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
-	<% end %>
+	<div class="col-md-6">
+		<%= link_to folder_path(folder), remote: true do %>
+		<i class="fas fa-pencil-alt xs-icon float-left edit pr-2" title="<%= folder.name %>" data-toggle="modal" data-target="#add_folder_modal"></i>
+		<% end %>
 
-	<%= link_to folder_path(folder), remote: true, data: {confirm: 'Do you want to remove the folder?'}, method: :delete do %>
-	<i class="fas fa-trash-alt xs-icon  float-left delete" title="<%= folder.name %>"></i>
-	<% end %>
+		<%= link_to folder_path(folder), remote: true, data: {confirm: 'Do you want to remove the folder?'}, method: :delete do %>
+		<i class="fas fa-trash-alt xs-icon  float-left delete" title="<%= folder.name %>"></i>
+		<% end %>
+	</div>
 </div>

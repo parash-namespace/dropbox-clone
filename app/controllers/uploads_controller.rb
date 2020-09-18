@@ -4,9 +4,10 @@ class UploadsController < ApplicationController
 	layout 'dropbox'
 
 	
-	before_action :get_folder
+	before_action :get_folder, :get_root_folder, :get_folders
 
 	def index
+		render file: 'folders/index'
 	end
 
 	def new
@@ -30,6 +31,14 @@ class UploadsController < ApplicationController
 
 	def uploads_params
 		params.require(:upload).permit(uploads: [])
+	end
+
+	def get_root_folder
+		@root_folder = @folder
+	end
+
+	def get_folders
+		@folders = @root_folder.children
 	end
 
 end

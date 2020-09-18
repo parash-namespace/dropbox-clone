@@ -1,2 +1,2 @@
-$("#modal_close").trigger("click");
-$("#folder_list").html("<%= j render 'folders/list' %>");
+$("#close_form_modal").trigger("click");
+$("#folder_list").append("<%= j render 'folders/each', {folder: @folder} %>");

@@ -1,5 +1,24 @@
 <div class="float-left">
-	Root / assa / 
+	
+	<% nav_list = [] %>
+	<% nav = @root_folder %>
+	<% nav_list << nav %>
+
+	<% while nav.parent.present? do %>
+		<% nav = nav.parent %>
+		<% nav_list << nav %>
+	<% end %>
+
+
+	<% nav_list.reverse.each do |nav| %>
+	<% if nav_list.first == nav %>
+	<%= nav.name %>
+	<% else %>
+	<%= link_to nav.name, folder_uploads_path(nav) %> /
+	<% end %>
+	<% end %>
+
+
 </div>
 
 <span>

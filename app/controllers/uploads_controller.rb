@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
 	layout 'dropbox'
 
 	
-	before_action :get_folder, :get_root_folder, :get_folders
+	before_action :get_folder, :get_root_folder, :get_folders, :is_owner?
 
 	def index
 		render file: 'folders/index'
@@ -39,6 +39,10 @@ class UploadsController < ApplicationController
 
 	def get_folders
 		@folders = @root_folder.children
+	end
+
+	def is_owner?
+		redirect_to root_path if @root_folder.owner_id != current_user.id
 	end
 
 end
